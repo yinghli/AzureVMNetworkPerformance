@@ -36,6 +36,21 @@ Netwokr latency is 146us.
 
 # VM to VM with acceleration network performance 
 
+All detail information about acceleration network, please check [here](https://docs.microsoft.com/en-us/azure/virtual-network/create-vm-accelerated-networking-cli) <br>
+
+We setup two D8sV3 VM with acceleration network at Azure East Asia region. <br>
+
+For network throughput test. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20with%20Acc.PNG)
+
+For Network latency test. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20with%20Acc.PNG)
+
+From the result, we can see D8sV3 VM egress throughput is 3.82Gbps whth single TCP thread. CWND value is 1.36MB. 
+Netwokr latency is 40us.
+
 # VM to VM throughput and latency cross region
 
 # VM to VM performance with standard load balancer
