@@ -71,10 +71,14 @@ Netwokr latency is 53us.
 
 # Summary
 
-Parameters      | VM-VM     | VM-VM with Accelerate | VM-SLB-VM with accelerate|
-----------------| ----------|-----------------------|--------------------------|
-Throughput      | 3.65Gbps  | 3.82Gbps              | 3.28Gbps                 |
-CWND            | 3.27MB    | 1.36MB                | 1.61MB                   |
-Latency         | 146us     | 40us                  | 53us                     |
+From the below table, accelerate network will improve the end to end network latency.<br>
+Lower latency will reduce the CWND when reaching the same level TCP throughput.<br>
+New standard load balancer will only add small latency for end to end network latecnty.<br>
+
+Parameters      | VM-VM without Accelerate | VM-VM with Accelerate | VM-SLB-VM with accelerate|
+----------------| -------------------------|-----------------------|--------------------------|
+Throughput      | 3.65Gbps                 | 3.82Gbps              | 3.28Gbps                 |
+CWND            | 3.27MB                   | 1.36MB                | 1.61MB                   |
+Latency         | 146us                    | 40us                  | 53us                     |
 
 
