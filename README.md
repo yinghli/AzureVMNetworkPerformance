@@ -20,16 +20,19 @@ We setup two D8sV3 VM at Azure East Asia region.
 Using [iperf3](https://iperf.fr/) to test network throughput and [qperf](https://www.opsdash.com/blog/network-performance-linux.html) to test latency. <br>
 
 For network throughput test. <br>
-Server side use default setup ``` iperf3 -s ```. <br>
-Client side use single thread and lastest 30 second ``` iperf3 -c 10.0.2.4 -t 30```. <br>
+Server side use default setup ``` iperf3 -s ``` <br>
+Client side use single thread and lastest 30 second ``` iperf3 -c 10.0.2.4 -t 30``` <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20without%20Acc.PNG)
 
 For Network latency test. <br>
-Server side use default setup ``` qperf ```. <br>
-Client side use tcp latency setup ``` qperf -v 10.0.2.4 tcp_lat```. <br>
+Server side use default setup ``` qperf ``` <br>
+Client side use tcp latency setup ``` qperf -v 10.0.2.4 tcp_lat``` <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20without%20Acc.PNG)
+
+From the result, we can see D8sV3 VM egress throughput is 3.61Gbps whth single TCP thread. CWND value is 3.27MB. 
+Netwokr latency is 146us.
 
 # VM to VM with acceleration network performance 
 
