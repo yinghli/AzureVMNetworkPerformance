@@ -31,7 +31,7 @@ Client side use tcp latency setup ``` qperf -v 10.0.2.4 tcp_lat``` <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20without%20Acc.PNG)
 
-From the result, we can see D8sV3 VM egress throughput is 3.65Gbps whth single TCP thread. CWND value is 3.27MB. 
+From the result, we can see D8sV3 VM egress throughput is 3.65Gbps with single TCP thread. CWND value is 3.27MB. 
 Netwokr latency is 146us.
 
 # VM to VM with acceleration network performance 
@@ -48,9 +48,23 @@ For Network latency test. <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20with%20Acc.PNG)
 
-From the result, we can see D8sV3 VM egress throughput is 3.82Gbps whth single TCP thread. CWND value is 1.36MB. 
+From the result, we can see D8sV3 VM egress throughput is 3.82Gbps with single TCP thread. CWND value is 1.36MB. 
 Netwokr latency is 40us.
+
+# VM to VM performance with standard load balancer
+
+Azure released standard load balancer. This SLB support low latency load sharing and HA port.<br>
+In this post, we setup a new standard load balancer, put 2 VM with acceleration networking.<br>
+We will test the bandwidth and latency impact when adding new SLB. 
+
+For network throughput test. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-SLB%20bw%20with%20Acc.PNG)
+
+For Network latency test. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-SLB%20lat%20with%20Acc.PNG)
 
 # VM to VM throughput and latency cross region
 
-# VM to VM performance with standard load balancer
+
