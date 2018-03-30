@@ -53,8 +53,9 @@ Netwokr latency is 40us.
 
 # VM to VM performance with standard load balancer
 
-Azure released standard load balancer. This SLB support low latency load sharing and HA port.<br>
-In this post, we setup a new standard load balancer, put 2 VM with acceleration networking.<br>
+Azure released [standard load balancer(SLB)](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-overview). This SLB support low latency load sharing and [HA port](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-ha-ports-overview).<br>
+In this post, we setup a SLB, put 2 VM with acceleration networking in the backend pool.<br>
+We setup another VM with acceleration netwokring and send traffic to SLB frontend IP address. <br>
 We will test the bandwidth and latency impact when adding new SLB. 
 
 For network throughput test. <br>
