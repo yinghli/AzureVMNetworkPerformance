@@ -66,6 +66,15 @@ For Network latency test. <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-SLB%20lat%20with%20Acc.PNG)
 
-# VM to VM throughput and latency cross region
+From the result, we can see D8sV3 VM egress throughput is 3.28Gbps with single TCP thread. CWND value is 1.61MB. 
+Netwokr latency is 53us.
+
+# Summary
+
+Parameters      | VM-VM     | VM-VM with Accelerate | VM-SLB-VM with accelerate|
+----------------| ----------|-----------------------|--------------------------|
+Throughput      | 3.65Gbps  | 3.82Gbps              | 3.28Gbps                 |
+CWND            | 3.27MB    | 1.36MB                | 1.61MB                   |
+Latency         | 146us     | 40us                  | 53us                     |
 
 
