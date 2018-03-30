@@ -31,7 +31,7 @@ Client side use tcp latency setup ``` qperf -v 10.0.2.4 tcp_lat``` <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20without%20Acc.PNG)
 
-From the result, we can see D8sV3 VM egress throughput is 3.61Gbps whth single TCP thread. CWND value is 3.27MB. 
+From the result, we can see D8sV3 VM egress throughput is 3.65Gbps whth single TCP thread. CWND value is 3.27MB. 
 Netwokr latency is 146us.
 
 # VM to VM with acceleration network performance 
