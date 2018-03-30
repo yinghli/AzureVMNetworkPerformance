@@ -12,19 +12,22 @@ Please note that multiple interface is used to provide different subnet design, 
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/D8sV3.PNG)
 
+To learn how many network interfaces different Azure VM sizes support, please check [here](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes-general)
+
 # VM to VM throughput and latency within same region
 
-We setup two D8sV3 VM at Azure East Asia region. Using iperf3 to test network throughput and qperf to test latency. <br>
+We setup two D8sV3 VM at Azure East Asia region. 
+Using [iperf3](https://iperf.fr/) to test network throughput and [qperf](https://www.opsdash.com/blog/network-performance-linux.html) to test latency. <br>
 
-For network throughput test. 
-Server side use default setup ``` iperf3 -s ```. 
-Client side use single thread and lastest 30 second ``` iperf3 -c 10.0.2.4 -t 30```. 
+For network throughput test. <br>
+Server side use default setup ``` iperf3 -s ```. <br>
+Client side use single thread and lastest 30 second ``` iperf3 -c 10.0.2.4 -t 30```. <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20without%20Acc.PNG)
 
-For Network latency test.
-Server side use default setup ``` qperf ```.
-Client side use tcp latency setup ``` qperf -v 10.0.2.4 tcp_lat```
+For Network latency test. <br>
+Server side use default setup ``` qperf ```. <br>
+Client side use tcp latency setup ``` qperf -v 10.0.2.4 tcp_lat```. <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20without%20Acc.PNG)
 
