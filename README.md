@@ -51,6 +51,23 @@ For Network latency test. <br>
 From the result, we can see D8sV3 VM egress throughput is 3.82Gbps with single TCP thread. CWND value is 1.36MB. 
 Netwokr latency is 40us.
 
+# VM to VM performance with basic load balancer
+
+Azure by default provide a free load balancer.<br>
+This load balancer required that VM should be same AVAILABILITY SET. <br>
+In this setup, we create a basic load balancer and put 2 VM in same availability set with acceleration networking in the backend pool.<br>
+We will test the bandwidth and latency impact when adding basic load balancer. <br> 
+For network throughput test. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-LB%20bw%20with%20Acc.PNG)
+
+For Network latency test. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-LB%20lat%20with%20Acc.PNG)
+
+From the result, we can see D8sV3 VM egress throughput is 3.28Gbps with single TCP thread. CWND value is 1.32MB. 
+Netwokr latency is 81us.
+
 # VM to VM performance with standard load balancer
 
 Azure released [standard load balancer(SLB)](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-overview). This SLB support low latency load sharing and [HA port](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-ha-ports-overview).<br>
@@ -102,10 +119,10 @@ From the below table, accelerate network will improve the end to end network lat
 Lower latency will reduce the CWND when reaching the same level TCP throughput.<br>
 New standard load balancer will only add small latency for end to end network latecnty.<br>
 
-Parameters      | VM-VM without Accelerate | VM-VM with Accelerate | VM-SLB-VM with accelerate| VM-VM cross region|
-----------------| -------------------------|-----------------------|--------------------------|-------------------|
-Throughput      | 3.65Gbps                 | 3.82Gbps              | 3.28Gbps                 | 3.72Gbps          |
-CWND            | 3.27MB                   | 1.36MB                | 1.61MB                   | 102MB             |
-Latency         | 146us                    | 40us                  | 53us                     | 222ms             |
+Parameters      | VM-VM without Acc | VM-VM with Acc | VM-LB-VM with Acc |VM-SLB-VM with Acc | VM-VM cross region|
+----------------| ------------------|----------------|-------------------|-------------------|-------------------|
+Throughput      | 3.65Gbps          | 3.82Gbps       | 3.28Gbps          | 3.28Gbps          | 3.72Gbps          |
+CWND            | 3.27MB            | 1.36MB         | 1.31MB            | 1.61MB            | 102MB             |
+Latency         | 146us             | 40us           | 81us              | 53us              | 222ms             |
 
 
