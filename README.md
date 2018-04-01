@@ -56,6 +56,8 @@ Netwokr latency is 40us.
 Azure by default provide a free load balancer.<br>
 This load balancer required that VM should be same AVAILABILITY SET. <br>
 In this setup, we create a basic load balancer and put 2 VM in same availability set with acceleration networking in the backend pool.<br>
+We setup another VM with acceleration netwokring and send traffic to LB frontend IP address. <br>
+We also need to define the load labance rule in order that testing traffic can pass the load balancer. We use TCP 12000 for testing.<br>
 We will test the bandwidth and latency impact when adding basic load balancer. <br> 
 For network throughput test. <br>
 
@@ -73,6 +75,7 @@ Netwokr latency is 81us.
 Azure released [standard load balancer(SLB)](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-overview). This SLB support low latency load sharing and [HA port](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-ha-ports-overview).<br>
 In this post, we setup a SLB, put 2 VM with acceleration networking in the backend pool.<br>
 We setup another VM with acceleration netwokring and send traffic to SLB frontend IP address. <br>
+Because of HA port support, we don't need to define any specify port for load balance rules.<br>
 We will test the bandwidth and latency impact when adding new SLB. 
 
 For network throughput test. <br>
