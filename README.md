@@ -51,6 +51,32 @@ For Network latency test. <br>
 From the result, we can see D8sV3 VM egress throughput is 3.82Gbps with single TCP thread. CWND value is 1.36MB. 
 Netwokr latency is 40us.
 
+Beside network throughput, some customers want to know Azure VM packet processing capability, as known as network interface forwarding rate when packet size is 64 bytes. <br>
+Qperf have a capability to send different message size when testing TCP bandwidth. We will use this feature to test Azure VM packet forwarding rate information. <br>
+We will test single CPU core message rate processing capability and total VM capability. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/Single%20Core%20PPS.PNG)
+
+From the result, we can see that single CPU core can get 603Kpps when message size is 1 byte. <br>
+So we will scale this test using script and leverage total 8 CPU in the VM. <br>
+On server side, we open 8 qperf on parallel and use taskset to assign each qperf to run on each CPU core. <br>
+```
+for cpu in {0..7}
+do
+ taskset -c $cpu ./qperf -lp $[cpu+10000] &
+done
+
+```
+On client side, we open 8 qperf on parallel and do same taskset as server side. We collect the msg_rate output and sum all CPU core to get VM total message rate. <br>
+```
+#!/bin/bash
+for cpu in {0..7}
+do
+ taskset -c $cpu ./qperf -vv -m 1 -t 30 -lp $[cpu+10000] 10.0.2.5 tcp_bw quit | grep msg_rate &
+done
+```
+After the testing, D8sV3 VM total message processing rate is about 3.1Mpps. 
+
 # VM to VM performance with basic load balancer
 
 Azure by default provide a free load balancer.<br>
