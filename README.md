@@ -75,7 +75,10 @@ do
  taskset -c $cpu ./qperf -vv -m 1 -t 30 -lp $[cpu+10000] 10.0.2.5 tcp_bw quit | grep msg_rate &
 done
 ```
-After the testing, D8sV3 VM total message processing rate is about 3.1Mpps. 
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/Multi%20Core%20PPS.PNG)
+From the result, we can see when 8 core process the packet, each qperf can only handle 400K message rate. <br>
+We sum all 8 thread together, D8sV3 VM total message processing rate is about 3.1Mpps. 
 
 # VM to VM performance with basic load balancer
 
