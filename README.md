@@ -165,10 +165,20 @@ From the below table, accelerate network will improve the end to end network lat
 Lower latency will reduce the CWND when reaching the same level TCP throughput.<br>
 New standard load balancer will only add small latency for end to end network latecnty.<br>
 
-Parameters      | VM-VM without Acc | VM-VM with Acc | VM-LB-VM with Acc |VM-SLB-VM with Acc | VM-VM cross region|
-----------------| ------------------|----------------|-------------------|-------------------|-------------------|
-Throughput      | 3.65Gbps          | 3.82Gbps       | 3.28Gbps          | 3.28Gbps          | 3.72Gbps          |
-CWND            | 3.27MB            | 1.36MB         | 1.31MB            | 1.61MB            | 102MB             |
-Latency         | 146us             | 40us           | 81us              | 53us              | 222ms             |
+Parameters      | VM-VM without Acc | VM-VM with Acc | VM-LB-VM with Acc |VM-SLB-VM with Acc | 
+----------------| ------------------|----------------|-------------------|-------------------|
+Throughput      | 3.65Gbps          | 3.82Gbps       | 3.28Gbps          | 3.28Gbps          |
+CWND            | 3.27MB            | 1.36MB         | 1.31MB            | 1.61MB            |
+Latency         | 146us             | 40us           | 81us              | 53us              |
+
+Below the summary of VM to VM cross region test result.
+VPN gateway is the bottle neck of the performance. 
+Global VNET peer have minimal performance impact comparing with direct PIP connection.
+
+Parameters      | VM-VM with PIP    | VM-VM with VPN | VM-VM with Peer |
+----------------| ------------------|----------------|---------------- |
+Throughput      | 2.12Gbps          | 549Mbps        | 1.76Gbps        |
+CWND            | 24.5MB            | 12.2MB         | 33.7MB          |            
+Latency         | 186ms             | 168ms          | 186ms           |
 
 
