@@ -146,8 +146,13 @@ sysctl -p
 ```
 
 After the setup, we retest with iperf3 single tcp thread and get below result.<br>
+We see that throughput is around 2Gbps and have packet retry. <br>
 
-![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20with%20Acc%20cross%20region%20tcp.PNG)
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20tcp%20tune%20Cross%20PIP.PNG)
+
+Second, we will setup two IPSec VPN gateway and test the latency and throughput. 
+
+Third, we will setup global VNET peering to test both latency and throughput.
 
 # Summary
 
