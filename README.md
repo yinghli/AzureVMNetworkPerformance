@@ -120,25 +120,29 @@ Netwokr latency is 53us.
 
 # VM to VM performance in different region
 
-We setup two D8sV3 VM with acceleration network at Azure East Asia and Central US region.<br>
-We will first test the two VM network latency, this will have big impact for network throughput.<br>
+In Azure, there are 3 methods can link those two region VM together. <br>
+First one is using VM public IP(PIP), VM can talk directly with their PIP. <br>
+Second one is using VNET-VNET IPSec VPN. Each region VNET will setup an IPSec VPN gateway, two gateways will setup an IPSec VPN tunnel, VM can talk each other via tunnel. <br>
+Third one is using new feature called global VNET peering. This feature allow different region VM can talk directly without any gateway support. <br> 
+We will first test the two VM network latency, this will have significant impact for network throughput. <br>
 
-![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20with%20Acc%20cross%20region.PNG)
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20Cross%20PIP.PNG)
 
-From the result, one way network latency is 111ms, the round trip latency is 222ms. <br>
+From the result, one way network latency is 83ms, the round trip latency is 166ms. <br>
 
-![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20with%20Acc%20cross%20region.PNG)
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20PIP.PNG)
 
-If we use the default setup, single TCP thread throughput can only be only 107Mbps because network latency.<br>
-Also we see that CWND is 6.05MB. <br>
+If we use the default setup, single TCP thread throughput can only be only 131Mbps because of high network latency.<br>
+Also we see that CWND is 6.02MB. <br>
 If we wants to increase the single TCP thread throughput, we must increase the TCP send and receive buffer.<br>
-Basiclly, Throughput = buffer size / latency. If we wants to get 4Gbps throughput with 230ms latency network, buffer size should be around 120MB.<br>
-We modify system TCP parameter to increase the buffer size.<br>
+Basiclly, Throughput = buffer size / latency. If we wants to get 4Gbps throughput with 166ms latency network, buffer size should be around 85MB.<br>
+We modify system TCP parameter to increase the buffer size to 128MB.<br>
 ```
 echo 'net.core.wmem_max=131072000' >> /etc/sysctl.conf
 echo 'net.core.rmem_max=131072000' >> /etc/sysctl.conf
 echo 'net.ipv4.tcp_rmem= 10240 87380 131072000' >> /etc/sysctl.conf
 echo 'net.ipv4.tcp_wmem= 10240 87380 131072000' >> /etc/sysctl.conf
+sysctl -p
 ```
 
 After the setup, we retest with iperf3 single tcp thread and get below result.<br>
