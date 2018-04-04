@@ -153,9 +153,18 @@ We see that throughput is around 2Gbps and have packet retry. <br>
 Second, we will setup two IPSec VPN gateway and test the latency and throughput.<br>
 We choose VPNGw1 which the performance is 650Mbps. <br>
 
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20Cross%20DIP%20vpn%20vs%20PIP.PNG)
+
+From the result, two VM connected by VPN have 2 hops. But latency is much lower than PIP. <br>
+VPN traffic may be routed by another WAN connection and have shorter distance. <br> 
+
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20DIP%20vpn.PNG)
 
 Third, we will setup global VNET peering to test both latency and throughput.
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20Cross%20DIP%20peer%20vs%20PIP.PNG)
+
+We can see that from global VNET peering have only hop between two VM. Latecny is almost same. 
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20DIP%20peer.PNG)
 
