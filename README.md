@@ -135,7 +135,7 @@ From the result, one way network latency is 83ms, the round trip latency is 166m
 If we use the default setup, single TCP thread throughput can only be only 131Mbps because of high network latency.<br>
 Also we see that CWND is 6.02MB. <br>
 If we wants to increase the single TCP thread throughput, we must increase the TCP send and receive buffer.<br>
-Basiclly, Throughput = buffer size / latency. If we wants to get 4Gbps throughput with 166ms latency network, buffer size should be around 85MB.<br>
+Basiclly, if there is no packet drop, TCP Throughput = buffer size / latency. If we wants to get 4Gbps throughput with 166ms latency network, buffer size should be around 85MB.<br>
 We modify system TCP parameter to increase the buffer size to 128MB.<br>
 ```
 echo 'net.core.wmem_max=131072000' >> /etc/sysctl.conf
