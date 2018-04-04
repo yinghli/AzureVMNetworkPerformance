@@ -150,9 +150,14 @@ We see that throughput is around 2Gbps and have packet retry. <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20tcp%20tune%20Cross%20PIP.PNG)
 
-Second, we will setup two IPSec VPN gateway and test the latency and throughput. 
+Second, we will setup two IPSec VPN gateway and test the latency and throughput.<br>
+We choose VPNGw1 which the performance is 650Mbps. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20DIP%20vpn.PNG)
 
 Third, we will setup global VNET peering to test both latency and throughput.
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20DIP%20peer.PNG)
 
 # Summary
 
