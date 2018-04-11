@@ -120,10 +120,12 @@ Netwokr latency is 53us.
 
 # VM to VM performance in different region
 
-In Azure, there are 3 methods can link those two region VM together. <br>
+In Azure, there are 4 methods can link those two region VM together. <br>
 First one is using VM public IP(PIP), VM can talk directly with their PIP. <br>
 Second one is using VNET-VNET IPSec VPN. Each region VNET will setup an IPSec VPN gateway, two gateways will setup an IPSec VPN tunnel, VM can talk each other via tunnel. <br>
 Third one is using new feature called global VNET peering. This feature allow different region VM can talk directly without any gateway support. <br> 
+Forth one is host ExpressRoute gateway and link two VNET gateway to a single ExpressRoute circuit. <br>
+
 We will first test the two VM network latency, this will have significant impact for network throughput. <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20Cross%20PIP.PNG)
@@ -167,6 +169,9 @@ Third, we will setup global VNET peering to test both latency and throughput.
 We can see that from global VNET peering have only hop between two VM. Latecny is almost same. 
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20DIP%20peer.PNG)
+
+Forth, we will setup two ExpressRoute gateway in each VNET, and link those two gateway to single ExpressRoute circuit.<br>
+In this case, the traffic flow will be: VM - ExpressRoute Gateway - Microsoft ExpressRoute Edge - ExpressRoute Gateway - VM. <br>
 
 # Summary
 
