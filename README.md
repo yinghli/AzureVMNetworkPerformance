@@ -172,6 +172,13 @@ We can see that from global VNET peering have only hop between two VM. Latecny i
 
 Forth, we will setup two ExpressRoute gateway in each VNET, and link those two gateway to single ExpressRoute circuit.<br>
 In this case, the traffic flow will be: VM - ExpressRoute Gateway - Microsoft ExpressRoute Edge - ExpressRoute Gateway - VM. <br>
+Two VM connected by ER is 3 hops. Latency is almost same 165ms with IPSec VPN. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20Cross%20DIP%20ER%20vs%20PIP.PNG)
+
+For the single TCP throughput, this methond can only get 240Mbps. <br>
+
+![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20DIP%20ER.PNG)
 
 # Summary
 
@@ -189,10 +196,10 @@ Below the summary of VM to VM cross region test result.
 VPN gateway is the bottle neck of the performance. 
 Global VNET peer have minimal performance impact comparing with direct PIP connection.
 
-Parameters      | VM-VM with PIP    | VM-VM with VPN | VM-VM with Peer |
-----------------| ------------------|----------------|---------------- |
-Throughput      | 2.12Gbps          | 549Mbps        | 1.76Gbps        |
-CWND            | 24.5MB            | 12.2MB         | 33.7MB          |            
-Latency         | 186ms             | 168ms          | 186ms           |
+Parameters      | VM-VM with PIP    | VM-VM with VPN | VM-VM with Peer | VM-VM with ER |
+----------------| ------------------|----------------|---------------- |---------------|
+Throughput      | 2.12Gbps          | 549Mbps        | 1.76Gbps        | 240Mbps       |
+CWND            | 24.5MB            | 12.2MB         | 33.7MB          | 5.85MB        |           
+Latency         | 186ms             | 168ms          | 186ms           | 168ms         |
 
 
