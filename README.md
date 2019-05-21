@@ -21,7 +21,7 @@ Using [iperf3](https://iperf.fr/) to test network throughput and [qperf](https:/
 
 For network throughput test. <br>
 Server side use default setup ``` iperf3 -s ``` <br>
-Client side use single thread and lastest 30 second ``` iperf3 -c 10.0.2.4 -t 30``` <br>
+Client side use single thread and lasts 30 second ``` iperf3 -c 10.0.2.4 -t 30``` <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20without%20Acc.PNG)
 
@@ -32,7 +32,7 @@ Client side use tcp latency setup ``` qperf -v 10.0.2.4 tcp_lat``` <br>
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20without%20Acc.PNG)
 
 From the result, we can see D8sV3 VM egress throughput is 3.65Gbps with single TCP thread. CWND value is 3.27MB. 
-Netwokr latency is 146us.
+Network latency is 146us.
 
 # VM to VM with acceleration network performance 
 
@@ -49,7 +49,7 @@ For Network latency test. <br>
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20with%20Acc.PNG)
 
 From the result, we can see D8sV3 VM egress throughput is 3.82Gbps with single TCP thread. CWND value is 1.36MB. 
-Netwokr latency is 40us.
+Network latency is 40us.
 
 
 # VM to VM performance with basic load balancer
@@ -57,8 +57,8 @@ Netwokr latency is 40us.
 Azure by default provide a free load balancer.<br>
 This load balancer required that VM should be same AVAILABILITY SET. <br>
 In this setup, we create a basic load balancer and put 2 VM in same availability set with acceleration networking in the backend pool.<br>
-We setup another VM with acceleration netwokring and send traffic to LB frontend IP address. <br>
-We also need to define the load labance rule in order that testing traffic can pass the load balancer. We use TCP 12000 for testing.<br>
+We setup another VM with acceleration networking and send traffic to LB frontend IP address. <br>
+We also need to define the load balance rule in order that testing traffic can pass the load balancer. We use TCP 12000 for testing.<br>
 We will test the bandwidth and latency impact when adding basic load balancer. <br> 
 For network throughput test. <br>
 
@@ -69,13 +69,13 @@ For Network latency test. <br>
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-LB%20lat%20with%20Acc.PNG)
 
 From the result, we can see D8sV3 VM egress throughput is 3.28Gbps with single TCP thread. CWND value is 1.32MB. 
-Netwokr latency is 81us.
+Network latency is 81us.
 
 # VM to VM performance with standard load balancer
 
-Azure released [standard load balancer(SLB)](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-overview). This SLB support low latency load sharing and [HA port](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-ha-ports-overview).<br>
+Azure released [standard load balance(SLB)](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-overview). This SLB support low latency load sharing and [HA port](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-ha-ports-overview).<br>
 In this post, we setup a SLB, put 2 VM with acceleration networking in the backend pool.<br>
-We setup another VM with acceleration netwokring and send traffic to SLB frontend IP address. <br>
+We setup another VM with acceleration networking and send traffic to SLB frontend IP address. <br>
 Because of HA port support, we don't need to define any specify port for load balance rules.<br>
 We will test the bandwidth and latency impact when adding new SLB. 
 
@@ -88,7 +88,7 @@ For Network latency test. <br>
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-SLB%20lat%20with%20Acc.PNG)
 
 From the result, we can see D8sV3 VM egress throughput is 3.28Gbps with single TCP thread. CWND value is 1.61MB. 
-Netwokr latency is 53us.
+Network latency is 53us.
 
 # VM to VM performance in different region
 
@@ -109,7 +109,7 @@ From the result, one way network latency is 83ms, the round trip latency is 166m
 If we use the default setup, single TCP thread throughput can only be only 131Mbps because of high network latency.<br>
 Also we see that CWND is 6.02MB. <br>
 If we wants to increase the single TCP thread throughput, we must increase the TCP send and receive buffer.<br>
-Basiclly, if there is no packet drop, TCP Throughput = buffer size / latency. If we wants to get 4Gbps throughput with 166ms latency network, buffer size should be around 85MB.<br>
+Basically, if there is no packet drop, TCP Throughput = buffer size / latency. If we wants to get 4Gbps throughput with 166ms latency network, buffer size should be around 85MB.<br>
 We modify system TCP parameter to increase the buffer size to 128MB.<br>
 ```
 echo 'net.core.wmem_max=131072000' >> /etc/sysctl.conf
@@ -138,7 +138,7 @@ Third, we will setup global VNET peering to test both latency and throughput.
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20Cross%20DIP%20peer%20vs%20PIP.PNG)
 
-We can see that from global VNET peering have only hop between two VM. Latecny is almost same. 
+We can see that from global VNET peering have only hop between two VM. Latency is almost same. 
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20DIP%20peer.PNG)
 
@@ -148,7 +148,7 @@ Two VM connected by ER is 3 hops. Latency is almost same 165ms with IPSec VPN. <
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20lat%20Cross%20DIP%20ER%20vs%20PIP.PNG)
 
-For the single TCP throughput, this methond can only get 240Mbps. <br>
+For the single TCP throughput, this methods can only get 240Mbps. <br>
 
 ![](https://github.com/yinghli/azure-vm-network-performance/blob/master/VM-VM%20bw%20Cross%20DIP%20ER.PNG)
 
